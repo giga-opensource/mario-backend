@@ -1,0 +1,21 @@
+{
+  "name": "mario-api",
+  "version": "0.0.1",
+  "description": "back end for mario",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.4.8",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "GIGA Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giga-opensource/mario-api/issues"
+  },
+  "homepage": "https://github.com/giga-opensource/mario-api#readme"
+}
