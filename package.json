@@ -4,9 +4,13 @@
   "description": "back end for mario",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.13.4",
+    "co-views": "^2.1.0",
+    "koa": "^1.2.0",
+    "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0",
     "mongoose": "^4.4.8",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "swig": "^1.4.2"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,15 +1,11 @@
-var issue = require('../models/issue');
+var Issue = require('../models/issue');
 
-exports.index = function(req, res, next) {
-  issue.find(function(err, docs) {
-    if (err) return next(err);
-    res.send(docs);
-  });
+exports.index = function*() {
+  var issues = yield Issue.find();
+  this.body = issues;
 };
 
-exports.create = function(req, res, next) {
-  issue.create({name: 'new issue'}, function(err, doc) {
-    if (err) return next(err);
-    res.send(doc);
-  });
+exports.create = function*() {
+  var issue = yield Issue.create({title: 'new issue'})
+  this.body = issues;
 };

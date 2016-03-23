@@ -1,19 +1,34 @@
-var app = require('express')();
-var server = require('http').Server(app);
+var app = require('koa')();
+var router = require('koa-router')();
+
+// static file
+var serve = require('koa-static');
+
+// template
+var views = require('co-views');
+var render = views(__dirname + '/views', { ext: 'swig' });
+
+// server and socket io
+var server = require('http').Server(app.callback());
 var io = require('socket.io')(server);
 
+// database
 var mongoose = require('mongoose');
 var uri = 'mongodb://localhost/mario';
-global.db = mongoose.createConnection(uri);
+global.db = app.context.db = mongoose.createConnection(uri);
 
+// controller
 var issues = require('./controllers/issues');
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
+app.use(serve(__dirname + '/public'));
 
-app.get('/issues', issues.index);
-app.post('/issues', issues.create);
+router.get('/', function *() {
+  this.body = yield render('index');
+});
+router.get('/issues', issues.index);
+router.post('/issues', issues.create);
+
+app.use(router.routes());
 
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
